@@ -1,0 +1,187 @@
+<div class="modal-header">
+  <h5 class="modal-title text-danger" id="loginModalLabel">Register Form</h5>
+</div>
+<div class="modal-body">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()">
+
+
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Adınız</label>
+      <input
+        type="name"
+        formControlName="name"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': f_register.name.errors }"
+        id="inputname"
+      />
+      <div *ngIf="f_register.name.errors" class="invalid-feedback">
+        <div *ngIf="f_register.name.errors.required">Name is required</div>
+        <div *ngIf="f_register.name.errors.pattern">
+         İsim alanında özel karakterler kullanılamaz.
+        </div>
+      </div>
+
+
+      <div *ngIf="f_register.name.errors" class="invalid-feedback">
+        <div *ngIf="f_register.name.errors?.['minlength']">
+          İsim 3 karakterden kısa olamaz.
+        </div>
+      </div>
+
+      <div *ngIf="f_register.name.errors" class="invalid-feedback">
+        <div *ngIf="f_register.name.errors?.['maxlength']">
+          İsim 24 karakterden uzun olamaz.
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Soyadınız</label>
+      <input
+        type="lastname"
+        formControlName="lastname"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': f_register.lastname.errors }"
+        id="inputlastname"
+      />
+      <div *ngIf="f_register.lastname.errors" class="invalid-feedback">
+        <div *ngIf="f_register.lastname.errors.required">Soyisim gereklidir!</div>
+        <div *ngIf="f_register.lastname.errors.pattern">
+          Soyad kısmında özel karakerler bulunamaz.
+        </div>
+      </div>
+
+
+      <div *ngIf="f_register.lastname.errors" class="invalid-feedback">
+        <div *ngIf="f_register.lastname.errors?.['minlength']">
+          Soyadı 3 karakterden kısa olamaz.
+        </div>
+      </div>
+
+      <div *ngIf="f_register.lastname.errors" class="invalid-feedback">
+        <div *ngIf="f_register.lastname.errors?.['maxlength']">
+          Soyadı 24 karakterden uzun olamaz.
+        </div>
+      </div>
+
+
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Telefon Numaranız</label>
+      <input
+        type="tel"
+        formControlName="tel"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': f_register.tel.errors }"
+        id="inputtel"
+      />
+      <div *ngIf="f_register.tel.errors" class="invalid-feedback">
+        <div *ngIf="f_register.tel.errors.required">Tel gereklidir!</div>
+        <div *ngIf="f_register.tel.errors.pattern">
+          Tel alanında sadece sayılar olmalıdır.
+        </div>
+      </div>
+
+
+      <div *ngIf="f_register.tel.errors" class="invalid-feedback">
+        <div *ngIf="f_register.tel.errors?.['minlength']">
+          Tel 11 haneden oluşmalıdır.
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Email Adresiniz</label>
+      <input
+        type="email"
+        formControlName="email"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': f_register.email.errors }"
+        id="inputEmail4"
+      />
+      <div *ngIf="f_register.email.errors" class="invalid-feedback">
+        <div *ngIf="f_register.email.errors.required">Email adresi gereklidir.</div>
+        <div *ngIf="f_register.email.errors.email">
+          Geçerli bir email adresi giriniz.
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Şifre</label>
+      <input
+        type="password"
+        formControlName="password"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': f_register.password.errors }"
+        id="inputPassword4"
+      />
+      <div *ngIf="f_register.password.errors" class="invalid-feedback">
+        <div *ngIf="f_register.password.errors.required">
+          Şifre gereklidir.
+        </div>
+      </div>
+
+      <div *ngIf="f_register.password.errors" class="invalid-feedback">
+        <div *ngIf="f_register.password.errors?.['minlength']">
+          Şifreniz en az 8 karakterden oluşmalıdır.
+        </div>
+      </div>
+
+      <div *ngIf="f_register.password.errors" class="invalid-feedback">
+        <div *ngIf="f_register.password.errors?.['maxlength']">
+          Şifreniz en fazla 16 karakterden oluşmalıdır.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleInputPassword2" class="form-label">Şifre Tekrar</label
+      >
+      <input
+        type="password"
+        (input)="controlPasswordMatch()"
+        formControlName="password2"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': f_register.password2.errors }"
+        id="inputPassword5"
+      />
+
+      <div *ngIf="f_register.password2.errors" class="invalid-feedback">
+        <div *ngIf="f_register.password2.errors.required">
+          Şifre tekrarı gereklidir.
+        </div>
+      </div>
+      <div *ngIf="f_register.password2.errors" class="invalid-feedback">
+        <div *ngIf="f_register.password2.errors?.['mustMatch']">
+          Şifreniz ve şifre tekrarınız aynı olmalıdır.
+        </div>
+      </div>
+
+    </div>
+
+    <div (click)="acceptClickEvent()" class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+      <label  class="form-check-label" for="flexCheckDefault">
+        Üyelik koşullarını ve kişisel verilerimin korunmasını kabul ediyorum.
+      </label>
+    </div>
+
+
+    <button *ngIf="isAcceptClick" type="submit" class="btn btn-primary">Kayıt Ol</button>
+
+  </form>
+
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    routerLink="/login"
+    class="btn btn-warning"
+    data-bs-dismiss="modal"
+  >
+    Login
+  </button>
+</div>
